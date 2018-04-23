@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"strconv"
@@ -31,11 +32,9 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	client := http.Client{}
 	resp, _ := client.Do(req)
 
-	fmt.Println(resp)
-
-	submissions := []Submission{}
-
-	_ = json.NewDecoder(resp.Body).Decode(submissions)
+	submissions := make([]Submission, 0)
+	body, _ := ioutil.ReadAll(resp.Body)
+	json.Unmarshal(body, &submissions)
 
 	numberOfLikes := 0
 	fmt.Println(submissions)
