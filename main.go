@@ -31,6 +31,8 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	client := http.Client{}
 	resp, _ := client.Do(req)
 
+	fmt.Println(resp)
+
 	submissions := []Submission{}
 
 	_ = json.NewDecoder(resp.Body).Decode(submissions)
