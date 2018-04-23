@@ -12,18 +12,17 @@ import (
 )
 
 type SubmissionData struct {
-	Path string
-	IP   string
+	Path string `json:"path"`
+	IP   string `json:"ip"`
 }
 
 type Submission struct {
-	Number int
-	Data   SubmissionData
+	Number int            `json:"number"`
+	Data   SubmissionData `json:"data"`
 }
 
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	key := os.Getenv("API_KEY")
-	fmt.Println(key)
 	path := request.QueryStringParameters["path"]
 
 	req, _ := http.NewRequest("GET", "https://api.netlify.com/api/v1/forms/5ade3140e4708575eb7932d4/submissions", nil)
