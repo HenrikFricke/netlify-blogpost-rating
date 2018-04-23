@@ -1,0 +1,8 @@
+[build]
+  command = ""
+  functions = "src/functions"
+  publish = "src/website"
+
+[build.environment]
+  # Change this path with the path to your repository
+  GO_IMPORT_PATH = "github.com/HenrikFricke/netlify-blogpost-rating"
