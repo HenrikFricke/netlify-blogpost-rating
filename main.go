@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -31,16 +30,13 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 
 	client := http.Client{}
 	resp, _ := client.Do(req)
+	body, _ := ioutil.ReadAll(resp.Body)
 
 	submissions := make([]Submission, 0)
-	body, _ := ioutil.ReadAll(resp.Body)
 	json.Unmarshal(body, &submissions)
 
 	numberOfLikes := 0
-	fmt.Println(submissions)
 	for _, submission := range submissions {
-		fmt.Println(submission)
-		fmt.Println(path)
 		if submission.Data.Path == path {
 			numberOfLikes = numberOfLikes + 1
 		}
