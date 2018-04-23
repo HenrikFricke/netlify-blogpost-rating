@@ -26,7 +26,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	path := request.QueryStringParameters["path"]
 
 	req, _ := http.NewRequest("GET", "https://api.netlify.com/api/v1/forms/5ade3140e4708575eb7932d4/submissions", nil)
-	req.Header.Set("Authorization", "Authorization: Bearer "+key)
+	req.Header.Set("Authorization", "Bearer "+key)
 
 	client := http.Client{}
 	resp, _ := client.Do(req)
