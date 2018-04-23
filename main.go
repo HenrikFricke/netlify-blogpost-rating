@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -32,6 +33,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 
 	cc := lc.ClientContext
 	key := cc.Env["API_KEY"]
+	fmt.Println(key)
 	path := request.QueryStringParameters["path"]
 
 	req, _ := http.NewRequest("GET", "https://api.netlify.com/api/v1/forms/5ade3140e4708575eb7932d4/submissions", nil)
@@ -45,7 +47,10 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 	_ = json.NewDecoder(resp.Body).Decode(submissions)
 
 	numberOfLikes := 0
+	fmt.Println(submissions)
 	for _, submission := range submissions {
+		fmt.Println(submission)
+		fmt.Println(path)
 		if submission.Data.Path == path {
 			numberOfLikes = numberOfLikes + 1
 		}
