@@ -1,10 +1,11 @@
 const likeContainer = document.querySelector("#likecontainer");
 const likeform = document.querySelector("#likeform");
+const likeid = document.querySelector("#likeid");
 
 const numberOfLikes = document.createElement("span");
 likeContainer.appendChild(numberOfLikes);
 
-fetch(".netlify/functions/likes?path=" + window.location.pathname)
+fetch(".netlify/functions/likes?id=" + likeid.value)
   .then(function(res) {
     if (!res.ok) {
       return "";

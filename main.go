@@ -12,8 +12,8 @@ import (
 )
 
 type SubmissionData struct {
-	Path string `json:"path"`
-	IP   string `json:"ip"`
+	ID string `json:"id"`
+	IP string `json:"ip"`
 }
 
 type Submission struct {
@@ -23,7 +23,7 @@ type Submission struct {
 
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	key := os.Getenv("API_KEY")
-	path := request.QueryStringParameters["path"]
+	id := request.QueryStringParameters["id"]
 
 	req, _ := http.NewRequest("GET", "https://api.netlify.com/api/v1/forms/5ade3140e4708575eb7932d4/submissions", nil)
 	req.Header.Set("Authorization", "Bearer "+key)
@@ -37,7 +37,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 
 	numberOfLikes := 0
 	for _, submission := range submissions {
-		if submission.Data.Path == path {
+		if submission.Data.ID == id {
 			numberOfLikes = numberOfLikes + 1
 		}
 	}
