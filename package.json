@@ -8,6 +8,7 @@
     "dotenv": "^5.0.1",
     "encoding": "^0.1.12",
     "netlify-lambda": "^0.4.0",
-    "node-fetch": "^2.1.2"
+    "node-fetch": "^2.1.2",
+    "request": "^2.85.0"
   }
 }
