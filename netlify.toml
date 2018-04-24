@@ -2,7 +2,3 @@
   command = "yarn build"
   functions = "build"
   publish = "src"
-
-[build.environment]
-  # Change this path with the path to your repository
-  GO_IMPORT_PATH = "github.com/HenrikFricke/netlify-blogpost-rating"
