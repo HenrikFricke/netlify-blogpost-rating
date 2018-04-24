@@ -31,7 +31,9 @@ likeform.addEventListener("submit", function(event) {
   fetch(action, {
     method: "POST",
     body: body
-  }).then(() => {
-    likeContainer.innerHTML = "Thanks for your feedback!";
-  });
+  })
+    .then(() => {
+      likeContainer.innerHTML = "Thanks for your feedback!";
+    })
+    .then(() => fetch(".netlify/functions/generate-likes-file"));
 });
