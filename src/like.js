@@ -2,18 +2,16 @@ const likeContainer = document.querySelector("#likecontainer");
 const likeform = document.querySelector("#likeform");
 const likeid = document.querySelector("#likeid");
 
-const numberOfLikes = document.createElement("span");
-likeContainer.appendChild(numberOfLikes);
-
-fetch(".netlify/functions/likes?id=" + likeid.value)
+fetch("likes.json")
   .then(function(res) {
     if (!res.ok) {
       return "";
     }
-    return res.text();
+    return res.json();
   })
-  .then(function(likes) {
-    numberOfLikes.innerHTML = likes + " likes";
+  .then(function(res) {
+    const likes = res[likeid.value] || 0;
+    likeContainer.innerHTML = likes + " likes";
   });
 
 likeform.addEventListener("submit", function(event) {
@@ -34,6 +32,6 @@ likeform.addEventListener("submit", function(event) {
     method: "POST",
     body: body
   }).then(() => {
-    numberOfLikes.innerHTML = "Thanks for your feedback!";
+    likeContainer.innerHTML = "Thanks for your feedback!";
   });
 });
