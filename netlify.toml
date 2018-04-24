@@ -1,5 +1,5 @@
 [build]
-  command = "make build && yarn build"
+  command = "yarn build"
   functions = "functions"
   publish = "src"
 
